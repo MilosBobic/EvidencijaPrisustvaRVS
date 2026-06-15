@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace SlojPrezentacija.Controllers
+namespace SlojPrezentacija.Kontroleri
 {
-    public class PotvrdaKontroler : Controller
+    public class PotvrdaController : Controller
     {
         private readonly HttpClient client;
 
-        public PotvrdaKontroler(HttpClient client)
+        public PotvrdaController(HttpClient client)
         {
             this.client = client;
         }

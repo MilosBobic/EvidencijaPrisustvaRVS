@@ -12,15 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SlojPodataka\SlojPodataka.csproj" />
-    <ProjectReference Include="..\SlojPoslovni\SlojPoslovni.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pogledi\Cas\" />
-    <Folder Include="Pogledi\Prisustvo\" />
-    <Folder Include="Pogledi\Ucenik\" />
-    <Folder Include="Pogledi\Prijava\" />
+    <ProjectReference Include="..\..\SlojPodataka\SlojPodataka.csproj" />
+    <ProjectReference Include="..\..\SlojPoslovni\SlojPoslovni.csproj" />
   </ItemGroup>
 
 </Project>

@@ -24,6 +24,11 @@ namespace SlojPodataka
         {
             base.OnModelCreating(modelBuilder);
 
+            modelBuilder.Entity<Cas>()
+                .HasOne(c => c.Predmet)
+                .WithMany(p => p.Casovi)
+                .HasForeignKey(c => c.PredmetId);
+
             modelBuilder.Entity<Prisustvo>()
                 .HasOne(p => p.Ucenik)
                 .WithMany(u => u.Prisustva)
@@ -33,11 +38,6 @@ namespace SlojPodataka
                 .HasOne(p => p.Cas)
                 .WithMany(c => c.Prisustva)
                 .HasForeignKey(p => p.CasId);
-
-            modelBuilder.Entity<Cas>()
-                .HasOne(c => c.Predmet)
-                .WithMany(p => p.Casovi)
-                .HasForeignKey(c => c.PredmetId);
         }
     }
 }

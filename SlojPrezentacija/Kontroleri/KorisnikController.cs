@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SlojPodataka.Modeli;
 
 namespace SlojPrezentacija.Kontroleri
 {
@@ -6,6 +7,12 @@ namespace SlojPrezentacija.Kontroleri
     {
         public IActionResult Index()
         {
+            if (HttpContext.Session
+                .GetString("Uloga") != "ADMIN")
+            {
+                return Unauthorized();
+            }
+
             return View();
         }
     }

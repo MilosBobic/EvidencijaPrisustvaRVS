@@ -1,0 +1,23 @@
+﻿@model SlojPodataka.Modeli.Ucenik
+
+<h2>Izmeni učenika</h2>
+
+<form method="post">
+
+    <input asp-for="Id" hidden />
+
+    <div>
+        <label>Ime</label>
+        <input asp-for="Ime" />
+    </div>
+
+    <div>
+        <label>Prezime</label>
+        <input asp-for="Prezime" />
+    </div>
+
+    <button type="submit">
+        Sačuvaj
+    </button>
+
+</form>

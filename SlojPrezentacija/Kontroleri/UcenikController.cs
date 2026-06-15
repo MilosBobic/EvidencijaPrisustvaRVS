@@ -1,24 +1,78 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SlojPrezentacija.Repozitorijumi;
+using SlojPodataka.Modeli;
+using SlojPodataka.Repozitorijumi;
 
 namespace SlojPrezentacija.Kontroleri
 {
     public class UcenikController : Controller
     {
-        public IActionResult Index(string pretraga)
+        private readonly RepozitorijumUcenika repo;
+
+        public UcenikController(RepozitorijumUcenika repo)
         {
-            var lista = repo.DajSve();
+            this.repo = repo;
+        }
 
-            if (!string.IsNullOrEmpty(pretraga))
-            {
-                lista = lista
-                    .Where(x =>
-                        x.Ime.Contains(pretraga) ||
-                        x.Prezime.Contains(pretraga))
-                    .ToList();
-            }
+        private bool JeAdmin()
+        {
+            return HttpContext.Session
+                .GetString("Uloga") == "ADMIN";
+        }
 
-            return View(lista);
+        public IActionResult Index()
+        {
+            return View(repo.DajSve());
+        }
+
+        public IActionResult Dodaj()
+        {
+            if (!JeAdmin())
+                return Unauthorized();
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Dodaj(Ucenik u)
+        {
+            if (!ModelState.IsValid)
+                return View(u);
+
+            repo.Dodaj(u);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Izmeni(int id)
+        {
+            if (!JeAdmin())
+                return Unauthorized();
+
+            return View(repo.DajPoID(id));
+        }
+
+        [HttpPost]
+        public IActionResult Izmeni(Ucenik u)
+        {
+            repo.Izmeni(u);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Obrisi(int id)
+        {
+            if (!JeAdmin())
+                return Unauthorized();
+
+            return View(repo.DajPoID(id));
+        }
+
+        [HttpPost]
+        public IActionResult Obrisi(Ucenik u)
+        {
+            repo.Obrisi(u.Id);
+
+            return RedirectToAction("Index");
         }
     }
 }

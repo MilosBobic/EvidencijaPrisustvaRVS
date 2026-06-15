@@ -1,25 +1,21 @@
 using Microsoft.AspNetCore.Mvc;
-using SlojPrezentacija.Models;
-using System.Diagnostics;
+using Microsoft.AspNetCore.Http;
 
-namespace SlojPrezentacija.Controllers
+namespace SlojPrezentacija.Kontroleri
 {
     public class HomeController : Controller
     {
         public IActionResult Index()
         {
-            return View();
-        }
+            if (HttpContext.Session
+                .GetString("Korisnik") == null)
+            {
+                return RedirectToAction(
+                    "Index",
+                    "Prijava");
+            }
 
-        public IActionResult Privacy()
-        {
             return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

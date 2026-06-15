@@ -1,0 +1,38 @@
+﻿@model List<SlojPodataka.Modeli.Predmet>
+
+<h2>Predmeti</h2>
+
+<a asp-action="Dodaj">
+    Dodaj predmet
+</a>
+
+<table border="1">
+
+    <tr>
+        <th>Naziv</th>
+        <th>Završen</th>
+        <th>Akcije</th>
+    </tr>
+
+    @foreach (var p in Model)
+    {
+        <tr>
+            <td>@p.Naziv</td>
+
+            <td>
+                @(p.Zavrsen ? "DA" : "NE")
+            </td>
+
+            <td>
+                @if (!p.Zavrsen)
+                {
+                    <a asp-action="Zavrsi"
+                       asp-route-id="@p.Id">
+                        Završi predmet
+                    </a>
+                }
+            </td>
+        </tr>
+    }
+
+</table>

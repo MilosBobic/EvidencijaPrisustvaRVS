@@ -1,4 +1,4 @@
-namespace SlojPrezentacija.Models
+namespace SlojPrezentacija.Modeli
 {
     public class ErrorViewModel
     {

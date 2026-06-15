@@ -1,8 +1,57 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<h1>Sistem evidencije prisustva</h1>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<p>
+    Dobrodošli:
+    <strong>
+        @Context.Session.GetString("Korisnik")
+    </strong>
+</p>
+
+<ul>
+
+    @if (Context.Session.GetString("Uloga") == "ADMIN")
+    {
+        <li>
+            <a asp-controller="Ucenik"
+               asp-action="Index">
+                Učenici
+            </a>
+        </li>
+
+        <li>
+            <a asp-controller="Predmet"
+               asp-action="Index">
+                Predmeti
+            </a>
+        </li>
+
+        <li>
+            <a asp-controller="Cas"
+               asp-action="Index">
+                Časovi
+            </a>
+        </li>
+
+        <li>
+            <a asp-controller="Korisnik"
+               asp-action="Index">
+                Korisnici
+            </a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Prisustvo"
+           asp-action="Index">
+            Prisustva
+        </a>
+    </li>
+
+    <li>
+        <a asp-controller="Prijava"
+           asp-action="Odjava">
+            Odjava
+        </a>
+    </li>
+
+</ul>

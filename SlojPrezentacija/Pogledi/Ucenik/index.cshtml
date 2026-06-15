@@ -1,0 +1,40 @@
+﻿@model List<SlojPodataka.Modeli.Ucenik>
+
+<h2>Učenici</h2>
+
+@if (Context.Session.GetString("Uloga") == "ADMIN")
+{
+    <a asp-action="Dodaj">Dodaj učenika</a>
+}
+
+<table border="1">
+    <tr>
+        <th>Ime</th>
+        <th>Prezime</th>
+        <th>Akcije</th>
+    </tr>
+
+    @foreach (var u in Model)
+    {
+        <tr>
+            <td>@u.Ime</td>
+            <td>@u.Prezime</td>
+            <td>
+                @if (Context.Session.GetString("Uloga") == "ADMIN")
+                {
+                    <a asp-action="Izmeni"
+                       asp-route-id="@u.Id">
+                        Izmeni
+                    </a>
+
+                    <text> | </text>
+
+                    <a asp-action="Obrisi"
+                       asp-route-id="@u.Id">
+                        Obrisi
+                    </a>
+                }
+            </td>
+        </tr>
+    }
+</table>
