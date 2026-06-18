@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SlojPrezentacija.Modeli
 {
-    public class ProveraPrisustvaVM
+    public class ProveraPrisustvaModel
     {
         [Required]
         public int UcenikId { get; set; }

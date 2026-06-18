@@ -1,1 +1,6 @@
-<Solution />
+<Solution>
+  <Project Path="SlojPodataka/SlojPodataka.csproj" />
+  <Project Path="SlojPoslovni/SlojPoslovni.csproj" />
+  <Project Path="SlojPrezentacija/SlojPrezentacija.csproj" />
+  <Project Path="SlojServis/SlojServis.csproj" />
+</Solution>

@@ -20,16 +20,14 @@ namespace SlojPrezentacija.Kontroleri
         }
 
         [HttpPost]
-        public IActionResult Index(
-            PrijavaModel model)
+        public IActionResult Index(PrijavaModel model)
         {
             if (!ModelState.IsValid)
                 return View(model);
 
-            var korisnik =
-                repo.Prijavi(
-                    model.KorisnickoIme,
-                    model.Lozinka);
+            var korisnik = repo.Prijavi(
+                model.KorisnickoIme,
+                model.Lozinka);
 
             if (korisnik == null)
             {
@@ -38,6 +36,10 @@ namespace SlojPrezentacija.Kontroleri
 
                 return View(model);
             }
+
+            HttpContext.Session.SetInt32(
+                "KorisnikId",
+                korisnik.Id);
 
             HttpContext.Session.SetString(
                 "Korisnik",

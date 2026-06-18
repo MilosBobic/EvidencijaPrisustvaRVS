@@ -1,4 +1,5 @@
-﻿using SlojPodataka.Modeli;
+﻿using Microsoft.EntityFrameworkCore;
+using SlojPodataka.Modeli;
 
 namespace SlojPodataka.Repozitorijumi
 {
@@ -13,12 +14,24 @@ namespace SlojPodataka.Repozitorijumi
 
         public List<Predmet> DajSve()
         {
-            return db.Predmeti.ToList();
+            return db.Predmeti
+                .Include(p => p.Korisnik)
+                .ToList();
+        }
+
+        public List<Predmet> DajSveSaKorisnikom()
+        {
+            return db.Predmeti
+                .Include(x => x.Korisnik)
+                .ToList();
         }
 
         public Predmet DajPoId(int id)
         {
-            return db.Predmeti.Find(id);
+            return db.Predmeti
+                .Include(p => p.Korisnik)
+                .Include(p => p.Casovi)
+                .FirstOrDefault(p => p.Id == id);
         }
 
         public void Dodaj(Predmet predmet)

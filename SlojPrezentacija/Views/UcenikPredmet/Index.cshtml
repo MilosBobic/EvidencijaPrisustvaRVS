@@ -1,0 +1,40 @@
+﻿@model List<SlojPodataka.Modeli.UcenikPredmet>
+
+<h2>Učenici na predmetima</h2>
+
+@if (Context.Session.GetString("Uloga") == "ADMIN")
+{
+    <a asp-action="Dodaj">Dodaj</a>
+}
+
+<table class="table">
+
+    <tr>
+        <th>Učenik</th>
+        <th>Predmet</th>
+        <th>Potvrda</th>
+    </tr>
+
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>
+                @x.Ucenik.Ime @x.Ucenik.Prezime
+            </td>
+
+            <td>
+                @x.Predmet.Naziv
+            </td>
+
+            <td>
+                <a asp-controller="Potvrda"
+                   asp-action="ProveriPrisustvo"
+                   asp-route-ucenikId="@x.UcenikId"
+                   asp-route-predmetId="@x.PredmetId">
+                    Proveri
+                </a>
+            </td>
+        </tr>
+    }
+
+</table>

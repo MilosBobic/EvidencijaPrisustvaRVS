@@ -7,7 +7,7 @@ namespace SlojPodataka
     public class DBUtils
     {
         protected readonly string connectionString =
-            "Server=.;Database=SkolaDB;Trusted_Connection=True;TrustServerCertificate=True;";
+            "Server=localhost\\SQLEXPRESS;Database=SkolaDB;Trusted_Connection=True;TrustServerCertificate=True;";
 
         protected void IzvrsiUpit(
             string upit,

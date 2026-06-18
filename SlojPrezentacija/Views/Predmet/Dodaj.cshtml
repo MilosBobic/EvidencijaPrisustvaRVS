@@ -1,0 +1,29 @@
+﻿@model SlojPodataka.Modeli.Predmet
+
+@{
+    ViewData["Title"] = "Dodaj predmet";
+}
+
+<h2>Dodaj predmet</h2>
+
+<form method="post" action="/Predmet/Dodaj">
+
+    <div class="form-group">
+        <label>Naziv</label>
+        <input class="form-control" name="Naziv" />
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Broj časova</label>
+        <input class="form-control" name="UkupnoBrojCasova" type="number" />
+    </div>
+
+    <div class="form-group mt-3" name="Korisnici">
+        <<label>Nastavnik</label>
+            <select asp-for="KorisnikId"
+                    asp-items="ViewBag.Korisnici">
+            </select>
+    </div>
+
+    <button class="btn btn-success mt-3">Sačuvaj</button>
+</form>

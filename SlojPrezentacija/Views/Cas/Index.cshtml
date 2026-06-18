@@ -1,0 +1,39 @@
+﻿@model List<Cas>
+
+<h2>Časovi</h2>
+<a asp-controller="Cas" asp-action="Dodaj" class="btn btn-primary">
+    Dodaj čas
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Predmet</th>
+            <th>Evidencija</th>
+            <th>Detalji</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.DatumVreme</td>
+                <td>@c.Predmet.Korisnik</td>
+                <td>
+                    <a asp-controller="Prisustvo"
+                       asp-action="Evidencija"
+                       asp-route-casId="@c.Id">
+                        Evidencija
+                    </a>
+                </td>
+                <td>
+                    <a asp-action="Detalji"
+                       asp-route-id="@c.Id">
+                        Detalji
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

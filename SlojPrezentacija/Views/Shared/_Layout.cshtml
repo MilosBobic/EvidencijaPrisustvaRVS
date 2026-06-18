@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
+<html>
+<head >
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+    <title>Sistem evidencije prisustva</title>
+</head>
+<body>
+
+    @if (Context.Session.GetString("Korisnik") != null)
+    {
+        <a asp-controller="Home" asp-action="Index">Početna</a>
+        <text> | </text>
+        <a asp-controller="Prisustvo" asp-action="Index">Prisustva</a>
+        <text> | </text>
+        <a asp-controller="Predmet" asp-action="Index">Predmeti</a>
+        <text> | </text>
+
+        @if(Context.Session.GetString("Uloga") == "ADMIN")
+        {
+            <a asp-controller="Ucenik" asp-action="Index">Učenici</a>
+            <text> | </text>
+
+            <a asp-controller="Cas" asp-action="Index">Časovi</a>
+            <text> | </text>
+
+            <a asp-controller="Korisnik" asp-action="Index">Korisnici</a>
+            <text> | </text>
+        }
+
+        <a asp-controller="Prijava"
+           asp-action="Odjava">
+            Odjava
+        </a>
+
+        <hr />
+    }
+
+    @RenderBody()
+
+</body>
+</html>

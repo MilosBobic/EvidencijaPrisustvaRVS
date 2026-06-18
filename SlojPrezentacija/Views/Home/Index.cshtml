@@ -1,0 +1,57 @@
+﻿<h1>Sistem evidencije prisustva</h1>
+
+<p>
+    Dobrodošli:
+    <strong>
+        @Context.Session.GetString("Korisnik")
+    </strong>
+</p>
+
+<ul>
+
+    @if (Context.Session.GetString("Uloga") == "ADMIN")
+    {
+        <li>
+            <a asp-controller="Ucenik"
+               asp-action="Index">
+                Učenici
+            </a>
+        </li>
+
+        <li>
+            <a asp-controller="Cas"
+               asp-action="Index">
+                Časovi
+            </a>
+        </li>
+
+        <li>
+            <a asp-controller="Korisnik"
+               asp-action="Index">
+                Korisnici
+            </a>
+        </li>
+    }
+
+    <li>
+        <a asp-controller="Predmet"
+           asp-action="Index">
+            Predmeti
+        </a>
+    </li>
+
+    <li>
+        <a asp-controller="Prisustvo"
+           asp-action="Index">
+            Provera
+        </a>
+    </li>
+
+    <li>
+        <a asp-controller="Prijava"
+           asp-action="Odjava">
+            Odjava
+        </a>
+    </li>
+
+</ul>

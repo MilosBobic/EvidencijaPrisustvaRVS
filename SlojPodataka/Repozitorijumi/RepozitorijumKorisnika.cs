@@ -1,5 +1,5 @@
 ﻿using SlojPodataka.Modeli;
-using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace SlojPodataka.Repozitorijumi
 {
@@ -7,16 +7,47 @@ namespace SlojPodataka.Repozitorijumi
     {
         private readonly KontekstBaze db;
 
-        public RepozitorijumKorisnika(KontekstBaze db)
+        public RepozitorijumKorisnika(
+            KontekstBaze db)
         {
             this.db = db;
         }
 
-        public Korisnik Prijavi(string korisnickoIme, string lozinka)
+        public List<Korisnik> DajSve()
         {
-            return db.Korisnici.FirstOrDefault(x =>
-                x.KorisnickoIme == korisnickoIme &&
-                x.Lozinka == lozinka);
+            return db.Korisnici.ToList();
+        }
+
+        public Korisnik DajPoID(int id)
+        {
+            return db.Korisnici
+                .FirstOrDefault(x => x.Id == id);
+        }
+
+        public void Dodaj(Korisnik k)
+        {
+            db.Korisnici.Add(k);
+            db.SaveChanges();
+        }
+
+        public void Obrisi(int id)
+        {
+            var k = DajPoID(id);
+
+            if (k != null)
+            {
+                db.Korisnici.Remove(k);
+                db.SaveChanges();
+            }
+        }
+
+        public Korisnik Prijavi(
+            string korisnickoIme,
+            string lozinka)
+        {
+            return db.Korisnici.FirstOrDefault(
+                x => x.KorisnickoIme == korisnickoIme
+                  && x.Lozinka == lozinka);
         }
     }
 }

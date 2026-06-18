@@ -15,6 +15,8 @@ builder.Services.AddScoped<RepozitorijumPredmeta>();
 builder.Services.AddScoped<RepozitorijumCas>();
 builder.Services.AddScoped<RepozitorijumPrisustva>();
 builder.Services.AddScoped<RepozitorijumKorisnika>();
+builder.Services.AddScoped<RepozitorijumUcenikPredmet>();
+builder.Services.AddScoped<IEvidencijaServis, EvidencijaServis>();
 
 var app = builder.Build();
 

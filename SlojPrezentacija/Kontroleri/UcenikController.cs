@@ -32,6 +32,16 @@ namespace SlojPrezentacija.Kontroleri
             return View();
         }
 
+        public IActionResult Detalji(int id)
+        {
+            var u = repo.DajPoID(id);
+
+            if (u == null)
+                return NotFound();
+
+            return View(u);
+        }
+
         [HttpPost]
         public IActionResult Dodaj(Ucenik u)
         {

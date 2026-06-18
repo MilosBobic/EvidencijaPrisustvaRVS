@@ -13,8 +13,17 @@ namespace SlojPodataka.Modeli
         [Required(ErrorMessage = "Broj časova je obavezan")]
         public int UkupnoBrojCasova { get; set; }
 
+        public int? KorisnikId { get; set; }
+
+        public Korisnik? Korisnik { get; set; }
+
         public bool Zavrsen { get; set; } = false;
 
-        public virtual ICollection<Cas>? Casovi { get; set; }
+        public ICollection<UcenikPredmet> UceniciPredmeti { get; set; }
+            = new List<UcenikPredmet>();
+
+        public ICollection<Cas> Casovi { get; set; }
+            = new List<Cas>();
+
     }
 }

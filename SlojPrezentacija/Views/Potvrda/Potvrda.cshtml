@@ -1,0 +1,91 @@
+﻿@model SlojPrezentacija.Modeli.PotvrdaModel
+
+@{
+    ViewData["Title"] = "Potvrda o pohađanju kursa";
+}
+
+<div style="max-width:900px; margin:auto;">
+
+    <h3>PRIVATNA ŠKOLA RAČUNARA</h3>
+    <h2>"EduRač"</h2>
+
+    <p>
+        Ul. Zrenjaninska bb, 23000 Zrenjanin<br />
+        Tel: 023/555-123 | edurac@email.com | www.edurac.rs<br />
+        PIB: 123456789 | Matični broj: 123456789
+    </p>
+
+    <br />
+
+    <p>
+        Broj: @Model.BrojPotvrde
+    </p>
+
+    <p>
+        Datum izdavanja: @DateTime.Now.ToString("dd.MM.yyyy")
+    </p>
+
+    <h2 style="text-align:center">
+        POTVRDA O POHAĐANJU KURSA
+    </h2>
+
+    <br />
+
+    <p>Ovom potvrdom se potvrđuje da je:</p>
+
+    <p>
+        <strong>Ime i prezime:</strong>
+        @Model.Ucenik
+    </p>
+
+    <p>
+        <strong>Naziv kursa:</strong>
+        @Model.Predmet
+    </p>
+
+    <p>
+        <strong>Ukupno časova:</strong>
+        @Model.UkupnoCasova
+    </p>
+
+    <p>
+        <strong>Pohađano časova:</strong>
+        @Model.PohadjanoCasova
+    </p>
+
+    <p>
+        <strong>Procenat prisustva:</strong>
+        @((Model.ProcenatPrisustva * 100).ToString("F2")) %
+    </p>
+
+    <p>
+        <strong>Nastavnik:</strong>
+        @Model.Nastavnik
+    </p>
+
+    <br />
+
+    <p>
+        Potvrda se izdaje na zahtev polaznika.
+    </p>
+
+    <br />
+    <br />
+
+    <table style="width:100%">
+        <tr>
+            <td style="text-align:center">
+                Nastavnik
+                <br /><br /><br />
+                _______________________
+            </td>
+
+            <td style="text-align:center">
+                Direktor škole
+                <br /><br /><br />
+                _______________________
+            </td>
+        </tr>
+    </table>
+
+</div>

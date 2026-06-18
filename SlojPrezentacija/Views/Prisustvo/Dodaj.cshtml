@@ -1,0 +1,36 @@
+﻿@model SlojPrezentacija.Modeli.EvidencijaPrisustvaModeli
+
+<h2>Evidencija prisustva</h2>
+
+<form asp-action="Dodaj" method="post">
+
+    <input type="hidden" asp-for="CasId" />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Učenik</th>
+                <th>Prisutan</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (int i = 0; i < Model.Ucenici.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Model.Ucenici[i].ImePrezime
+                        <input type="hidden" asp-for="Ucenici[i].UcenikId" />
+                    </td>
+
+                    <td>
+                        <input asp-for="Ucenici[i].Prisutan" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="submit">Sačuvaj</button>
+
+</form>

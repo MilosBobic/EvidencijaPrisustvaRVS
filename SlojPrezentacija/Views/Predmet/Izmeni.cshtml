@@ -1,0 +1,29 @@
+﻿@model SlojPodataka.Modeli.Predmet
+
+@{
+    ViewData["Title"] = "Izmeni predmet";
+}
+
+<h2>Izmeni predmet</h2>
+
+<form method="post" action="/Predmet/Izmeni">
+
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div class="form-group">
+        <label>Naziv</label>
+        <input class="form-control" name="Naziv" value="@Model.Naziv" />
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Broj časova</label>
+        <input class="form-control" name="UkupnoBrojCasova" type="number" value="@Model.UkupnoBrojCasova" />
+    </div>
+
+    <div class="form-group mt-2">
+        <label>Završen</label>
+        <input type="checkbox" name="Zavrsen" value="true" @(Model.Zavrsen ? "checked" : "") />
+    </div>
+
+    <button class="btn btn-primary mt-3">Sačuvaj izmene</button>
+</form>

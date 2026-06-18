@@ -1,0 +1,44 @@
+﻿@model SlojPrezentacija.Modeli.ProveraPrisustvaModel
+
+<h2>Provera prisustva</h2>
+
+<form method="post">
+
+    <div>
+        <label>Učenik</label>
+
+        <select asp-for="UcenikId"
+                asp-items="Model.Ucenici">
+        </select>
+    </div>
+
+    <br />
+
+    <div>
+        <label>Predmet</label>
+
+        <select asp-for="PredmetId"
+                asp-items="Model.Predmeti">
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit">
+        Proveri prisustvo
+    </button>
+
+</form>
+
+@if (ViewBag.Rezultat != null)
+{
+    <hr />
+
+    <h3>Rezultat</h3>
+
+    <p>@ViewBag.Rezultat</p>
+
+    <button onclick="window.print()">
+        Štampaj
+    </button>
+}

@@ -16,5 +16,8 @@ namespace SlojPodataka.Modeli
 
         [Required]
         public string Uloga { get; set; } //admin ili korisnik
+
+        public ICollection<Predmet> Predmeti { get; set; }
+            = new List<Predmet>();
     }
 }

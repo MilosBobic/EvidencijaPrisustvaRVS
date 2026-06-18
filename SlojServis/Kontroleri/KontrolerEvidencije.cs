@@ -1,58 +1,49 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using SlojPodataka.Repozitorijumi;
 using SlojPoslovni;
 using SlojPoslovni.Modeli;
-using System.Runtime.InteropServices;
 
-namespace SlojServis.Controllers
+namespace SlojServis.Kontroleri
 {
     [ApiController]
     [Route("api/[controller]")]
     public class KontrolerEvidencije : ControllerBase
     {
-        private readonly RepozitorijumPrisustva repoPrisustva;
-        private readonly RepozitorijumCas repoCas;
+        private readonly IEvidencijaServis servis;
         private readonly IWebHostEnvironment env;
 
         public KontrolerEvidencije(
-            RepozitorijumPrisustva repoPrisustva,
-            RepozitorijumCas repoCas,
+            IEvidencijaServis servis,
             IWebHostEnvironment env)
         {
-            this.repoPrisustva = repoPrisustva;
-            this.repoCas = repoCas;
+            this.servis = servis;
             this.env = env;
         }
 
-        [HttpGet("proveeri-prisustvo")]
-        public IActionResult ProveeriPrisustvo()
+        [HttpGet("proveri-prisustvo")]
+        public IActionResult ProveriPrisustvo(int ucenikId, int predmetId)
         {
             try
             {
-                string putanja =
-                    Path.Combine(env.ContentRootPath,
-                    "parametri.json");
+                string putanja = Path.Combine(env.ContentRootPath, "parametri.json");
+                var json = System.IO.File.ReadAllText(putanja);
 
-                string json =
-                    System.IO.File.ReadAllText(putanja);
+                var cfg = JsonConvert.DeserializeObject<ParametarPrisustva>(json);
 
-                var parametar =
-                    JsonConvert.DeserializeObject<ParametarPrisustva>(json);
+                if (cfg == null)
+                    return StatusCode(500, "Neispravan parametri.json");
 
-                var proces =
-                    new ProcesIzdavanjaPotvrde(
-                        repoPrisustva,
-                        repoCas);
-
-                string rezultat =
-                    proces.Obradi(parametar);
+                var rezultat = servis.Obradi(
+                    ucenikId,
+                    predmetId,
+                    cfg.PragPrisustva
+                );
 
                 return Ok(rezultat);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(500, ex.ToString());
             }
         }
     }

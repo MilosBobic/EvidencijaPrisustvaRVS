@@ -1,0 +1,99 @@
+﻿@model List<SlojPodataka.Modeli.Predmet>
+
+@{
+    ViewData["Title"] = "Predmeti";
+}
+
+<h2>Predmeti</h2>
+@if (Context.Session.GetString("Uloga") == "ADMIN")
+{
+    <a href="/Predmet/Dodaj">Novi predmet</a>            
+}
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Naziv</th>
+            <th>Nastavnik</th>
+            <th>Broj časova</th>
+            <th>Završen</th>
+            <th>Učenici</th>
+            <th>Časovi</th>
+            @if (Context.Session.GetString("Uloga") == "ADMIN")
+            {
+                <th>Akcije</th>
+                <th>Dodaj učenika</th>
+                <th>Dodaj čas</th>
+            }
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>@p.Naziv</td>
+
+                <td>@p.Korisnik?.KorisnickoIme</td>
+
+                <td>@p.UkupnoBrojCasova</td>
+
+                <td>@(p.Zavrsen ? "DA" : "NE")</td>
+
+                <td>
+                    <a asp-controller="UcenikPredmet"
+                       asp-action="Index"
+                       asp-route-predmetId="@p.Id">
+                        Učenici
+                    </a>
+                </td>
+
+                <td>
+                    <a asp-controller="Cas"
+                       asp-action="Index"
+                       asp-route-predmetId="@p.Id">
+                        Časovi
+                    </a>
+                </td>
+
+                @if (Context.Session.GetString("Uloga") == "ADMIN")
+                {
+                    <td>
+                        <a asp-controller="Predmet"
+                           asp-action="Detalji"
+                           asp-route-id="@p.Id">
+                            Detalji
+                        </a>
+                        |
+                        <a asp-controller="Predmet"
+                           asp-action="Izmeni"
+                           asp-route-id="@p.Id">
+                            Izmeni
+                        </a>
+                        |
+                        <a asp-controller="Predmet"
+                           asp-action="Obrisi"
+                           asp-route-id="@p.Id">
+                            Obriši
+                        </a>
+                    </td>
+
+                <td>
+                    <a asp-controller="UcenikPredmet"
+                       asp-action="Dodaj"
+                       asp-route-predmetId="@p.Id">
+                        Dodaj učenika
+                    </a>
+                </td>
+                    <td>
+                        <a asp-controller="Cas"
+                           asp-action="Dodaj"
+                           asp-route-predmetId="@p.Id">
+                            Dodaj čas
+                        </a>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+﻿@model List<SlojPodataka.Modeli.Prisustvo>
+
+<h2>Evidencija prisustva</h2>
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Učenik</th>
+            <th>Predmet</th>
+            <th>Datum Časa</th>
+            <th>Prisutan</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>
+                    @p.Ucenik?.Ime @p.Ucenik?.Prezime
+                </td>
+
+                <td>
+                    @p.Cas?.Predmet?.Naziv
+                </td>
+
+                <td>
+                    @p.Cas?.DatumVreme
+                </td>
+
+                <td>
+                    @(p.Prisutan ? "DA" : "NE")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<hr />
+
+<a asp-controller="Prisustvo"
+   asp-action="Dodaj"
+   asp-route-casId="@ViewBag.CasId">
+    Dodaj prisustvo
+</a>

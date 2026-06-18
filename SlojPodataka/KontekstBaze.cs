@@ -10,6 +10,8 @@ namespace SlojPodataka
         {
         }
 
+        public DbSet<UcenikPredmet> UceniciPredmeti { get; set; }
+
         public DbSet<Ucenik> Ucenici { get; set; }
 
         public DbSet<Predmet> Predmeti { get; set; }
@@ -38,6 +40,24 @@ namespace SlojPodataka
                 .HasOne(p => p.Cas)
                 .WithMany(c => c.Prisustva)
                 .HasForeignKey(p => p.CasId);
+
+            modelBuilder.Entity<Prisustvo>()
+                .HasKey(p => new { p.UcenikId, p.CasId });
+
+            modelBuilder.Entity<UcenikPredmet>()
+                .HasOne(x => x.Ucenik)
+                .WithMany(x => x.UceniciPredmeti)
+                .HasForeignKey(x => x.UcenikId);
+
+            modelBuilder.Entity<UcenikPredmet>()
+                .HasOne(x => x.Predmet)
+                .WithMany(x => x.UceniciPredmeti)
+                .HasForeignKey(x => x.PredmetId);
+            modelBuilder.Entity<Predmet>()
+                .HasOne(p => p.Korisnik)
+                .WithMany(k => k.Predmeti)
+                .HasForeignKey(p => p.KorisnikId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

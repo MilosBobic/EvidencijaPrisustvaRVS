@@ -13,6 +13,7 @@ namespace SlojPodataka.Modeli
 
         public virtual Predmet? Predmet { get; set; }
 
-        public virtual ICollection<Prisustvo>? Prisustva { get; set; }
+        public ICollection<Prisustvo> Prisustva { get; set; }
+            = new List<Prisustvo>();
     }
 }

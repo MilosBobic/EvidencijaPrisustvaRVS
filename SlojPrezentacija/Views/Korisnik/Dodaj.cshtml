@@ -1,0 +1,45 @@
+﻿@model SlojPodataka.Modeli.Korisnik
+
+<h2>Dodaj korisnika</h2>
+
+<form method="post">
+
+    <div>
+        <label>Korisničko ime</label>
+        <input asp-for="KorisnickoIme" />
+    </div>
+
+    <br />
+
+    <div>
+        <label>Lozinka</label>
+        <input asp-for="Lozinka"
+               type="password" />
+    </div>
+
+    <br />
+
+    <div>
+        <label>Uloga</label>
+
+        <select asp-for="Uloga">
+
+            <option value="KORISNIK">
+                KORISNIK
+            </option>
+
+            <option value="ADMIN">
+                ADMIN
+            </option>
+
+        </select>
+    </div>
+
+    <br />
+
+    <button type="submit"
+            class="btn btn-primary">
+        Sačuvaj
+    </button>
+
+</form>

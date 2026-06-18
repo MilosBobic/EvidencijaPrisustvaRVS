@@ -2,7 +2,6 @@
 {
     public class Prisustvo
     {
-        public int Id { get; set; }
 
         public int UcenikId { get; set; }
 

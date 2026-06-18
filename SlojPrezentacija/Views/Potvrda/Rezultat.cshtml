@@ -1,0 +1,18 @@
+﻿@model SlojPoslovni.Modeli.PotvrdaRezultat
+
+<h2>Rezultat provere</h2>
+
+<p>Procenat: @((Model.Procenat * 100).ToString("F2"))%</p>
+
+@if (Model.IspunjavaUslov)
+{
+    <a asp-action="Generisi"
+       asp-route-ucenikId="@Model.ucenikId"
+       asp-route-predmetId="@Model.predmetId">
+        Generiši potvrdu
+    </a>
+}
+else
+{
+    <p style="color:red">Učenik nema dovoljno prisustva.</p>
+}

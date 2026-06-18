@@ -1,0 +1,29 @@
+﻿@model SlojPrezentacija.Modeli.PrijavaModel
+
+<h2>Prijava</h2>
+
+@if (ViewBag.Greska != null)
+{
+    <p style="color:red;">
+        @ViewBag.Greska
+    </p>
+}
+
+<form method="post">
+
+    <div>
+        <label>Korisničko ime</label>
+        <input asp-for="KorisnickoIme" />
+    </div>
+
+    <div>
+        <label>Lozinka</label>
+        <input asp-for="Lozinka"
+               type="password" />
+    </div>
+
+    <button type="submit">
+        Prijavi se
+    </button>
+
+</form>

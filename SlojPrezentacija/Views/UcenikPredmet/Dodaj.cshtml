@@ -1,0 +1,19 @@
+﻿@model SlojPodataka.Modeli.UcenikPredmet
+
+<h2>Dodela učenika predmetu</h2>
+
+<form method="post">
+
+    <label>Učenik</label>
+    <select asp-for="UcenikId" asp-items="ViewBag.Ucenici"></select>
+
+    <br />
+
+    <label>Predmet</label>
+    <select asp-for="PredmetId" asp-items="ViewBag.Predmeti"></select>
+
+    <br />
+
+    <button type="submit">Dodaj</button>
+
+</form>

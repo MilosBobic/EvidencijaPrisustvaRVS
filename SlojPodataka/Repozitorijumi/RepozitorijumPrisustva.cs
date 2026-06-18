@@ -17,17 +17,17 @@ namespace SlojPodataka.Repozitorijumi
             return db.Prisustva
                 .Include(x => x.Ucenik)
                 .Include(x => x.Cas)
-                .ThenInclude(x => x.Predmet)
+                .ThenInclude(c => c.Predmet)
                 .ToList();
         }
 
-        public Prisustvo DajPoId(int id)
+        public List<Prisustvo> DajPoCasu(int casId)
         {
             return db.Prisustva
                 .Include(x => x.Ucenik)
                 .Include(x => x.Cas)
-                .ThenInclude(x => x.Predmet)
-                .FirstOrDefault(x => x.Id == id);
+                .Where(x => x.CasId == casId)
+                .ToList();
         }
 
         public void Dodaj(Prisustvo prisustvo)
@@ -42,9 +42,10 @@ namespace SlojPodataka.Repozitorijumi
             db.SaveChanges();
         }
 
-        public void Obrisi(int id)
+        public void Obrisi(int ucenikId, int casId)
         {
-            var prisustvo = DajPoId(id);
+            var prisustvo = db.Prisustva
+                .FirstOrDefault(x => x.UcenikId == ucenikId && x.CasId == casId);
 
             if (prisustvo != null)
             {
@@ -52,6 +53,7 @@ namespace SlojPodataka.Repozitorijumi
                 db.SaveChanges();
             }
         }
+
 
         public List<Prisustvo> DajPoUcenikuIPredmetu(
             int ucenikId,
@@ -64,5 +66,33 @@ namespace SlojPodataka.Repozitorijumi
                     x.Cas.PredmetId == predmetId)
                 .ToList();
         }
+        public void DodajVise(
+            List<Prisustvo> prisustva)
+        {
+            db.Prisustva.AddRange(prisustva);
+            db.SaveChanges();
+        }
+
+        public void SacuvajIliAzuriraj(List<Prisustvo> lista)
+        {
+            foreach (var item in lista)
+            {
+                var postojece = db.Prisustva
+                    .FirstOrDefault(x => x.CasId == item.CasId
+                                      && x.UcenikId == item.UcenikId);
+
+                if (postojece == null)
+                {
+                    db.Prisustva.Add(item);
+                }
+                else
+                {
+                    postojece.Prisutan = item.Prisutan;
+                }
+            }
+
+            db.SaveChanges();
+        }
+
     }
 }

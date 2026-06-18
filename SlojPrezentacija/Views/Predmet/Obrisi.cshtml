@@ -1,0 +1,10 @@
+﻿@model SlojPodataka.Modeli.Predmet
+
+<h3>Da li želiš da obrišeš predmet: @Model.Naziv?</h3>
+
+<form method="post" action="/Predmet/Obrisi">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <button class="btn btn-danger">Obriši</button>
+    <a class="btn btn-secondary" href="/Predmet/Index">Otkaži</a>
+</form>

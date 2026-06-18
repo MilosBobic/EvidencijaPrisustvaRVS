@@ -30,7 +30,7 @@ namespace SlojPodataka.Repozitorijumi
         public Ucenik DajPoID(int id) //dbutils
         {
             DataTable tabela =
-                DajTabelu($"SELECT * FROM Ucenik WHERE Id = {id}");
+                DajTabelu($"SELECT * FROM Ucenici WHERE Id = {id}");
 
             if (tabela.Rows.Count == 0)
                 return null;

@@ -1,0 +1,38 @@
+﻿@model List<SlojPodataka.Modeli.Cas>
+
+@{
+    ViewData["Title"] = "Prisustva";
+}
+
+<h2>Prisustva</h2>
+
+<table class="table table-striped mt-3">
+    <thead>
+        <tr>
+            <th>Predmet</th>
+            <th>Nastavnik</th>
+            <th>Datum</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var c in Model)
+        {
+            <tr>
+                <td>@c.Predmet.Naziv</td>
+
+                <td>@c.Predmet.Korisnik.KorisnickoIme</td>
+
+                <td>@c.DatumVreme</td>
+
+                <td>
+                    <a asp-controller="Prisustvo"
+                       asp-action="Evidencija"
+                       asp-route-casId="@c.Id">
+                        Evidencija
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

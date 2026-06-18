@@ -1,0 +1,18 @@
+﻿@model SlojPodataka.Modeli.Predmet
+
+@{
+    ViewData["Title"] = "Detalji predmeta";
+}
+
+<h2>@Model.Naziv</h2>
+
+<p><b>Broj časova:</b> @Model.UkupnoBrojCasova</p>
+<p>Učenici:<a href="#"></a></p>
+<a asp-controller="UcenikPredmet"
+   asp-action="Index"
+   asp-route-predmetId="@Model.Id">
+    Prikaži učenike na predmetu
+</a>
+<p><b>Završen:</b> @(Model.Zavrsen ? "DA" : "NE")</p>
+
+<a href="/Predmet/Index">Nazad</a>

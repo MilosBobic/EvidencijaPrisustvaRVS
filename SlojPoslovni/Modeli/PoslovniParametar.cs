@@ -2,9 +2,9 @@
 {
     public class ParametarPrisustva
     {
-        public int UcenikId { get; set; }
+        public int ucenikId { get; set; }
 
-        public int PredmetId { get; set; }
+        public int predmetId { get; set; }
 
         public double PragPrisustva { get; set; }
     }

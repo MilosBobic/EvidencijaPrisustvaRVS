@@ -1,0 +1,20 @@
+﻿@model SlojPodataka.Modeli.Cas
+
+<h2>Dodaj čas</h2>
+
+<form method="post">
+
+    <label>Datum i vreme</label>
+    <input asp-for="DatumVreme" type="datetime-local" />
+    <span asp-validation-for="DatumVreme"></span>
+
+    <br />
+
+    <label>Predmet</label>
+    <select asp-for="PredmetId" asp-items="ViewBag.Predmeti"></select>
+
+    <br />
+
+    <button type="submit">Sačuvaj</button>
+
+</form>

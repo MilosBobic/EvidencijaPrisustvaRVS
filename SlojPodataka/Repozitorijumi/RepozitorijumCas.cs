@@ -16,6 +16,7 @@ namespace SlojPodataka.Repozitorijumi
         {
             return db.Casovi
                 .Include(x => x.Predmet)
+                .ThenInclude(p => p.Korisnik)
                 .ToList();
         }
 
@@ -23,6 +24,7 @@ namespace SlojPodataka.Repozitorijumi
         {
             return db.Casovi
                 .Include(x => x.Predmet)
+                .ThenInclude(p => p.Korisnik)
                 .FirstOrDefault(x => x.Id == id);
         }
 
