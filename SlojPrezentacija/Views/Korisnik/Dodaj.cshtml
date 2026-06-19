@@ -2,11 +2,11 @@
 
 <h2>Dodaj korisnika</h2>
 
-<form method="post">
+<form method="post" onsubmit="return validirajKorisnika()">
 
     <div>
         <label>Korisničko ime</label>
-        <input asp-for="KorisnickoIme" />
+        <input asp-for="KorisnickoIme" id="korisnickoIme" />
     </div>
 
     <br />
@@ -14,7 +14,8 @@
     <div>
         <label>Lozinka</label>
         <input asp-for="Lozinka"
-               type="password" />
+               type="password"
+               id="lozinka" />
     </div>
 
     <br />
@@ -23,22 +24,55 @@
         <label>Uloga</label>
 
         <select asp-for="Uloga">
-
-            <option value="KORISNIK">
-                KORISNIK
-            </option>
-
-            <option value="ADMIN">
-                ADMIN
-            </option>
-
+            <option value="KORISNIK">KORISNIK</option>
+            <option value="ADMIN">ADMIN</option>
         </select>
     </div>
 
     <br />
+
+    <div id="greska" style="color:red"></div>
 
     <button type="submit">
         Sačuvaj
     </button>
 
 </form>
+
+<script>
+    function validirajKorisnika() {
+
+        let korisnickoIme =
+            document.getElementById("korisnickoIme").value.trim();
+
+        let lozinka =
+            document.getElementById("lozinka").value;
+
+        let regexKorisnik = /^[a-zA-Z0-9]{4,20}$/;
+
+        let regexLozinka =
+            /^(?=.*[A-Z])(?=.*[0-9]).{6,}$/;
+
+        let greska = document.getElementById("greska");
+
+        greska.innerHTML = "";
+
+        if (!regexKorisnik.test(korisnickoIme))
+        {
+            greska.innerHTML =
+                "Korisničko ime mora imati 4-20 slova ili brojeva.";
+
+            return false;
+        }
+
+        if (!regexLozinka.test(lozinka))
+        {
+            greska.innerHTML =
+                "Lozinka mora imati najmanje 6 karaktera, jedno veliko slovo i jedan broj.";
+
+            return false;
+        }
+
+        return true;
+    }
+</script>

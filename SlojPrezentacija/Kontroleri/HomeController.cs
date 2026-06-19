@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace SlojPrezentacija.Kontroleri
 {
-    public class HomeController : Controller
+    public class PocetnaController : Controller
     {
         public IActionResult Index()
         {

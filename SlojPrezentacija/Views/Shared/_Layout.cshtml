@@ -7,11 +7,13 @@
           rel="stylesheet">
     <title>Sistem evidencije prisustva</title>
 </head>
+
+@RenderSection("Scripts", required: false)
 <body>
 
     @if (Context.Session.GetString("Korisnik") != null)
     {
-        <a asp-controller="Home" asp-action="Index">Početna</a>
+        <a asp-controller="Pocetna" asp-action="Index">Početna</a>
         <text> | </text>
         <a asp-controller="Prisustvo" asp-action="Index">Prisustva</a>
         <text> | </text>

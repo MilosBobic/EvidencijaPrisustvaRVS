@@ -6,11 +6,17 @@ namespace SlojPodataka.Modeli
     {
         public int Id { get; set; }
 
-        [Required]
-        [StringLength(50)]
+        [Required(ErrorMessage = "Unesite korisničko ime.")]
+        [RegularExpression(
+            @"^[a-zA-Z0-9]{4,20}$",
+            ErrorMessage = "Korisničko ime mora sadržati 4-20 slova i brojeva bez razmaka.")]
+        [StringLength(20)]
         public string KorisnickoIme { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Unesite lozinku.")]
+        [RegularExpression(
+            @"^(?=.*[A-Z])(?=.*\d).{6,}$",
+            ErrorMessage = "Lozinka mora imati najmanje 6 karaktera, jedno veliko slovo i jedan broj.")]
         [StringLength(100)]
         public string Lozinka { get; set; }
 

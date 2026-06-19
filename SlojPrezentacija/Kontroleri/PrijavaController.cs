@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SlojPodataka.Repozitorijumi;
 using SlojPrezentacija.Modeli;
+using System.ComponentModel.DataAnnotations;
 
 namespace SlojPrezentacija.Kontroleri
 {
@@ -51,7 +52,7 @@ namespace SlojPrezentacija.Kontroleri
 
             return RedirectToAction(
                 "Index",
-                "Home");
+                "Pocetna");
         }
 
         public IActionResult Odjava()
